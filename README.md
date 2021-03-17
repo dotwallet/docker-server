@@ -8,6 +8,9 @@ Any use of this microservice must start with a real user [login to dotwallet](ht
 
 This server includes complete API endpoint documentation.
 To see how to make requests to the server's API, run the app locally and go to http:localhost:3003/docs
+Or, check out a live version of this microservice [here](https://dotwallet-microservice-xfl2wlshtq-de.a.run.app/). You can send http requests to it as per the auto generated [docs](https://dotwallet-microservice-xfl2wlshtq-de.a.run.app/docs/)
+
+## To use
 
 There are two ways to use this microservice:
 
