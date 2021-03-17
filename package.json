@@ -12,7 +12,7 @@
     "start": "node src/index.js",
     "test-watch": "env TEST=true jest --watchAll",
     "test": "env TEST=true jest",
-    "build": "docker build -t jewcub/dotwallet_service:latest . && docker push jewcub/dotwallet_service:latest",
+    "build": "docker build -t dotwalletteam/dotwallet_service:latest . && docker push dotwalletteam/dotwallet_service:latest",
     "google-build": "sh build.sh",
     "google-deploy": "sh deploy.sh",
     "ssl-deploy": "sh init-letsencrypt.sh"

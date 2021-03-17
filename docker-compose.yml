@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   dotwallet:
-    image: docker.io/jewcub/dotwallet_service
+    image: docker.io/dotwalletteam/dotwallet_service
     expose:
       - "3003"
     env_file:
