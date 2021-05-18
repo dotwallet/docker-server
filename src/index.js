@@ -29,6 +29,9 @@ module.exports = { app };
 if (process.env.TEST !== "true")
   app.listen(PORT, () =>
     console.log(
-      `DotWallet example app listening at ${APP_URL}\nAPI docs available at ${APP_URL}/docs\n If running on docker, check http://localhost:${PORT} and http://localhost:${PORT}/docs `
+      `DotWallet app listening at ${APP_URL}\n
+      API docs available at ${APP_URL}/docs\n
+      If running on docker, check http://localhost:${PORT} and http://localhost:${PORT}/docs\n
+      `
     )
   );

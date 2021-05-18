@@ -2,7 +2,7 @@ const { CLIENT_ID, CLIENT_SECRET } = require("../config");
 const DotWallet = require("@dotwallet/sdk-node");
 const dotwallet = new DotWallet();
 dotwallet.init(CLIENT_ID, CLIENT_SECRET);
-
+console.log('DotWallet initialized with ENV: ', { CLIENT_ID, CLIENT_SECRET })
 const { auth } = require("./auth");
 const { autoPay, createOrder, paymentResult } = require("./payment");
 const { saveData } = require("./saveData");
