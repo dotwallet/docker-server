@@ -1,3 +1,5 @@
+const DotWallet = require('@dotwallet/sdk-node');
+
 const { checkToken, checkTokenMiddleWare } = require('./auth');
 
 /**
@@ -55,8 +57,9 @@ const { checkToken, checkTokenMiddleWare } = require('./auth');
  *               example: 0
  *             server_token:
  *               type: string
- *               required: true
+ *               required: false
  *               example: test_token
+ *               description: The token must either be passed here or in the headers
  *         - $ref: '#/components/schemas/orderBase'
  *     autoPayOrder:
  *       allOf:
@@ -76,11 +79,20 @@ const { checkToken, checkTokenMiddleWare } = require('./auth');
  */
 
 /**
+ * @param {DotWallet} dotwallet
+ * @param {import('express').Application} app
  * @swagger
  * /create-order:
  *   post:
  *     summary: Creates an order_id from a valid order object.
  *     description: "On completion, use the order_id to redirect the user to complete the payment."
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: Auth token header. must be passed as "Bearer ${token}". This must be passed either here or in the body
+ *         required: false
+ *         type: string
+ *         example: "Bearer eyalkjasdf.efsfas"
  *     requestBody:
  *       required: true
  *       content:
@@ -101,7 +113,9 @@ const { checkToken, checkTokenMiddleWare } = require('./auth');
  *                   type: string
  */
 const createOrder = (app, dotwallet) =>
+
   app.post('/create-order', checkTokenMiddleWare, async (req, res) => {
+    console.log({ req })
     const order = { ...req.body };
 
     const orderIDCall = await dotwallet.getOrderID(order, true);
@@ -112,7 +126,7 @@ const createOrder = (app, dotwallet) =>
         const orderStatus = await dotwallet.getOrderStatus(orderIDCall, true);
         // console.log('orderStatus', orderStatus);
         // optional, check the blockchain transaction
-        const tx = await dotwallet.queryTx(orderStatus.txid, true);
+        // const tx = await dotwallet.queryTx(orderStatus.txid, true);
         // console.log('tx', tx);
       }, 1000 * 60);
 
@@ -120,6 +134,13 @@ const createOrder = (app, dotwallet) =>
     }
   });
 
+/** 
+ * @param {import('express').Application} app
+* @swagger
+* /payment-result:
+*   post:
+*     summary: receives a payment result notification and prints to console
+*/
 const paymentResult = (app) =>
   app.post('/payment-result', (req, res) => {
     // the response from 'notice_uri' will be in the request queries
@@ -128,10 +149,19 @@ const paymentResult = (app) =>
   });
 
 /**
+  * @param {DotWallet} dotwallet
+ * @param {import('express').Application} app
  * @swagger
  * /autopay:
  *   post:
  *     summary: processes an automatic payment.
+ *     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         description: Auth token header. must be passed as "Bearer ${token}". This must be passed either here or in the body
+ *         required: false
+ *         type: string
+ *         example: "Bearer eyalkjasdf.efsfas"
  *     requestBody:
  *       required: true
  *       content:

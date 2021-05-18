@@ -330,6 +330,15 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@dotwallet/sdk-node@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@dotwallet/sdk-node/-/sdk-node-1.0.4.tgz#a944dbc4d9d389b5d596cd42072d25b613d801b7"
+  integrity sha512-F958ll+HWYEUSnKuWnuFBMmlk/HrTX6jjLP7MxZMyo4BZv+6cwMGJOr1D37ypHXEOwhP53ea0wzGKJOhlPHNBQ==
+  dependencies:
+    axios "^0.21.1"
+    url "^0.11.0"
+    uuid "^8.3.2"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
@@ -1493,15 +1502,6 @@ dotenv@^8.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-8.2.0.tgz#97e619259ada750eea3e4ea3e26bceea5424b16a"
   integrity sha512-8sJ78ElpbDJBHNeBzUbUVLsqKdccaa/BXF1uPTw3GrvQTBgrQrtObr2mUrE38vzYd8cEv+m/JBfDLioYcfXoaw==
 
-dotwallet-node@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/dotwallet-node/-/dotwallet-node-1.1.0.tgz#430f7b89d4c280372cded6e90c48c169f1c38014"
-  integrity sha512-H5ze6H1CwX8OP4qb9qgyfRWisaC5e6ThzHGHV/W9xUyZwcCYFqSeM3StNWtLQO6eDVuK8bFuES8tSj345/DKzg==
-  dependencies:
-    axios "^0.21.1"
-    url "^0.11.0"
-    uuid "^8.3.2"
-
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -1832,9 +1832,9 @@ find-up@^4.0.0, find-up@^4.1.0:
     path-exists "^4.0.0"
 
 follow-redirects@^1.10.0:
-  version "1.13.3"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.13.3.tgz#e5598ad50174c1bc4e872301e82ac2cd97f90267"
-  integrity sha512-DUgl6+HDzB0iEptNQEXLx/KhTmDb8tZUHSeLqpnjpknR70H0nC2t9N73BK6fN4hOvJ84pKlIQVQ4k5FFlBedKA==
+  version "1.14.1"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.1.tgz#d9114ded0a1cfdd334e164e6662ad02bfd91ff43"
+  integrity sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg==
 
 for-in@^1.0.2:
   version "1.0.2"

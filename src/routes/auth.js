@@ -1,7 +1,7 @@
+const DotWallet = require('@dotwallet/sdk-node');
 const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const { CLIENT_SECRET } = require('../config');
-
 const createToken = (userID, expiresIn = '30 days') => {
   // console.log({ userID, expiresIn }, 1613982737 - 1613986337);
   const token = jwt.sign({ userID }, CLIENT_SECRET, { expiresIn });
@@ -30,21 +30,27 @@ const checkToken = (token) => {
   }
 };
 
-/** checks a token from request body, if valid moves to next()
- * @param {{body: {server_token: string}}} req
+/** checks a token from request body or from request headers, if valid moves to next()
+ * @param {{headers:{authorization: string} body: {server_token: string}}} req
+ * @param {import('express').Response} res
+ * @return {import('express').RequestHandler}
  */
 const checkTokenMiddleWare = (req, res, next) => {
   try {
-    const userID = checkToken(req.body.server_token);
+    console.log({ body: req.body, headers: req.headers })
+    const token = (req.headers.authorization) ? req.headers.authorization.split('Bearer ')[1] : req.body.server_token;
+    const userID = checkToken(token);
     if (typeof userID === 'string' && !userID.error) next();
     else throw userID.error;
   } catch (error) {
-    console.log({ error });
+    console.error({ error });
     res.json({ error: 'token validation error: ' + JSON.stringify(error) });
   }
 };
 
 /**
+ * @param {import('express').Application} app
+ * @param {DotWallet} dotwallet
  * @swagger
  * /auth:
  *   post:
@@ -132,10 +138,14 @@ const auth = (app, dotwallet) =>
   app.post('/auth', async (req, res) => {
     const authTokenData = await dotwallet.getUserToken(req.body.code, req.body.redirect_uri, true);
     const userAccessToken = authTokenData.access_token;
-    const userInfo = await dotwallet.getUserInfo(userAccessToken, true);
-
+    let userInfo = {}
+    if (userAccessToken)
+      userInfo = await dotwallet.getUserInfo(userAccessToken, true);
     const serverToken = createToken(userInfo.id);
-    const returnData = { ...userInfo, ...authTokenData, server_token: serverToken };
+    const returnData = {
+      ...userInfo, ...authTokenData, server_token: (userAccessToken && userInfo.id) ? serverToken : null
+    };
+
     // console.log({ returnData });
     res.json(returnData);
     // optionally alert your main backend server that the login was successful, and send the info there.

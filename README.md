@@ -7,7 +7,7 @@ This allows developers to quickly add DotWallet API functionality to their app.
 Any use of this microservice must start with a real user [login to dotwallet](https://developers.dotwallet.com/documents/en/#user-authorization). That will generate a `code`, which the microservice will use to authenticate the request. The server will return a `server_token` with a default expiry of 30 days (can be changed in .env file). All subsequent requests require this token.
 
 This server includes complete API endpoint documentation.
-To see how to make requests to the server's API, run the app locally and go to http:localhost:3003/docs
+To see how to make requests to the server's API, run the app locally and go to http:localhost:3005/docs
 
 Check out a live version of this microservice [here](https://dotwallet-microservice-xfl2wlshtq-de.a.run.app/). You can send http requests to it as per the auto generated [docs](https://dotwallet-microservice-xfl2wlshtq-de.a.run.app/docs/)
 
