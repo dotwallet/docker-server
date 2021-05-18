@@ -1,6 +1,6 @@
 {
 	"name": "docker-server",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "a microservice for working with DotWallet APIs",
 	"main": "src/index.js",
 	"repository": "https://github.com/dotwallet/docker-server.git",
